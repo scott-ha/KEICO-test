@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var gtw_id, dev_id;
 /* GET users listing. */
 router.get('/plugs',
   async function(req, res, next) {
@@ -376,13 +377,28 @@ router.get('/plugs',
       console.log(error);
     }
   });
-
-router.get('/1/90FD9FFFFEB8F916/off',
+router.get('/1/90FD9FFFFEB8F916/on',
   async function(req, res, next) {
     try {
       var res_data = {
         "rcd": "0",
         "rms": "플러그 ON 제어요청 성공",
+        "data": {}
+      }
+
+      res.status(200).send(res_data);
+      res_data = '';
+    } catch (e) {
+      console.error(error);
+    }
+  });
+// router.get('/' + gtw_id + '/' + dev_id + '/off',
+router.get('/1/90FD9FFFFEB8F916/off',
+  async function(req, res, next) {
+    try {
+      var res_data = {
+        "rcd": "0",
+        "rms": "플러그 OFF 제어요청 성공",
         "data": {}
       }
 
@@ -401,10 +417,27 @@ router.get('/on',
         "rms": "플러그 ALL ON 제어요청 성공",
         "data": {}
       }
+
       res.status(200).send(res_data);
       res_data = '';
     } catch (e) {
-      console.error(error);
+      console.error(e);
+    }
+  });
+
+router.get('/off',
+  async function(req, res, next) {
+    try {
+      var res_data = {
+        "rcd": "0",
+        "rms": "플러그 ALL OFF 제어요청 성공",
+        "data": {}
+      }
+
+      res.status(200).send(res_data);
+      res_data = '';
+    } catch (e) {
+      console.error(e);
     }
   });
 
